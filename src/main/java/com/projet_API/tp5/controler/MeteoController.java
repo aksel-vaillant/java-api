@@ -61,7 +61,7 @@ public class MeteoController {
         http.disconnect();
 
         // https://reqbin.com/req/java/v0crmky0/rest-api-post-example
-        
+
         return "meteo";
     }
 
