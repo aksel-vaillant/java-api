@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Adresses</title>
+    <!--/*/ 
+        <th:block th:include="fragments/general.html :: headerfiles"></th:block>
+    /*/-->
+</head>
+
+<body>
+    <!--/*/
+        <th:block th:include="fragments/general.html :: navbar"></th:block>
+    /*/-->
+
+    <h1>Votre météo :</h1>
+
+    <p th:text="'Pour l\'adresse : ' + ${label}"></p>
+    <p th:text="'Pourcentage de pluie : '+ ${probarain} + ' % -> '+ ${status}"></p>
+
+</body>
