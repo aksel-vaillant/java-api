@@ -10,38 +10,58 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class MeteoController {
-
-
-
 
     @PostMapping(path="/meteo", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String postBody(@ModelAttribute AddressMeteo addresseMeteo, Model model) throws IOException {
         model.addAttribute("addresses", addresseMeteo);
 
-        /*String sURL = "https://api-adresse.data.gouv.fr/search/?q=8+bd+du+port"; //just a string
+        /*URL url = new URL("https://api-adresse.data.gouv.fr/search/?q=8+bd+du+port");
+        HttpURLConnection http = (HttpURLConnection)url.openConnection();
 
-        // Connect to the URL using java's native library
-        URL url = new URL(sURL);
-        URLConnection request = url.openConnection();
-        request.connect();
+        http.setDoOutput(true);
+        http.setRequestProperty("Accept", "application/json");
+        http.setRequestProperty("Host", "api-adresse.data.gouv.fr");
 
-        // Convert to a JSON object to print data
-        JsonParser jp = new JsonParser(); //from gson
-        JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent())); //Convert the input stream to a json element
-        JsonObject rootobj = root.getAsJsonObject(); //May be an array, may be an object.
-        String zipcode = rootobj.get("zip_code").getAsString(); //just grab the zipcode
-        */
+        http.setRequestMethod("GET");
+        http.setConnectTimeout(10000);// 5000 milliseconds = 5 seconds
+        http.setReadTimeout(10000);
 
+        int status = http.getResponseCode();
+        System.out.println(status);
+
+        if(status >= 500){
+            // Fucking error
+            System.out.println("merdeeeee");
+        }else if(status>= 200 && status <=299){
+            // Getting datas
+            byte[] out = new byte[200];
+            OutputStream stream = http.getOutputStream();
+            stream.write(out);
+            System.out.println(out);
+            System.out.println(http.getResponseCode() + " " + http.getResponseMessage());
+        }
+        http.disconnect();*/
+
+        URL url = new URL("https://api-adresse.data.gouv.fr/search/?q=8+bd+du+port");
+        HttpURLConnection http = (HttpURLConnection)url.openConnection();
+        http.setRequestProperty("Accept", "*/*");
+
+        System.out.println(http.getResponseCode() + " " + http.getResponseMessage());
+        http.disconnect();
+
+        // https://reqbin.com/req/java/v0crmky0/rest-api-post-example
+        
         return "meteo";
     }
 
