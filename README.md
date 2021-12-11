@@ -1,5 +1,6 @@
-#Compte rendu du TP
-        Réalisé par Aksel Vaillant - ENSIM 
+#Compte rendu du TP  
+
+        Réalisé par Aksel Vaillant, étudiant ingénieur en informatique à ENSIM - Université Le Mans  
         Lien du github - https://github.com/aksel-vaillant/java-api
 
 ##Etape 5 - Description des dépendances
