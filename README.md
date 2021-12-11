@@ -1,5 +1,6 @@
 #Compte rendu du TP
-        - Réalisé par Aksel Vaillant - ENSIM 
+        Réalisé par Aksel Vaillant - ENSIM 
+        Lien du github - https://github.com/aksel-vaillant/java-api
 
 ##Etape 5 - Description des dépendances
 - Spring web : permet de fournir une infrastructure pour compiler et construire un site web
@@ -10,30 +11,66 @@
 - Thymeleaf : permet de travailler dans des environnements web et en offline pour simuler un siteweb
 
 ##Etape 13 - Controller
-1 - URL d'appel  - @GetMapping("/greeting")
+1 - URL d'appel  - @GetMapping("/greeting")  
 
 2 - Sélection du fichier HTML - return "greeting";
 
-3 - Envoie des informations - model.addAttribute("nomTemplate", nameGET);
+3 - Remplacer la valeur par défaut à l'aide de l'annotation @RequestParam
 
 ##Etape 17 - H2
-Un nouveau tableau de configuration a fait son apparition 
+La table Address a été ajoutée dans la BDD
+
+##Etape 18 - Hibernate
+Hibernate est un framework open source gérant la persistance des objets en base de données relationnelle.
+A l'aide de son système de notation, cela permet de modifier et manipuler les bases de données facilement à travers les objets java.
+
+##Etape 20 - Requête data.sql
+SELECT * FROM address  
+
+On affiche toute la table address
+
+##Etape 23
+@Autowired permet l'injection de dépendences pour pouvoir chercher l'interface AddressRepository, le service qui permet d'accéder à la base de donnée pour créer, lire, mettre à jour et supprimer les données
 
 ##Etape 30 - Ajout de Bootstrap
+    <dependency>
+        <groupId>org.webjars</groupId>
+        <artifactId>bootstrap</artifactId>
+        <version>5.1.3</version>
+    </dependency>
 
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>bootstrap</artifactId>
-			<version>5.1.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>webjars-locator</artifactId>
-			<version>0.30</version>
-		</dependency>
+##Fin TP4
+###Faut-il une clé API pour appeler MeteoConcept ?
+Oui, il faut un jeton/token pour accéder aux bases de données de MeteoConcept.
 
-Dans chaque fichier j'ajoute également dans le header...
+###Quelle URL appeler ?
+    String uri = "https://api.meteo-concept.com/api/forecast/daily?" +
+                "token=TOKEN&" +
+                "latlng="+ lat +","+ lon;
+Principalement composer de l'URL de l'api et la météo du jour. 
+On ajoute en plus de cela le token pour s'identifier auprès du serveur.
 
-<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css" />
+###Quelle méthode HTTP utiliser ?
+Pour réaliser une requête à ces serveurs, on doit utiliser la méthode GET pour passer en paramètres des informations supplémentaires permettant d'affiner notre recherche/demande.
 
+###Comment passer les paramètres d'appels ?
+En modifiant légèrement l'URL à appeler avec une concaténation d'éléments. On ajoute latlng - l'attribut permettant de décrire la latitude et la longitude du point GPS. 
+Le reste de l'URL se trouve à la question "Quelle URL appeler".
+
+###Où est l'information dont j'ai besoin dans la réponse
+![img.png](resource/img.png)
+  
+Exemple de réponse 
+
+###Pour afficher la prévision de météo du lieu visé par les coordonnées GPS  
+
+Architecture : response>forecast>item[0]>weather  
+Sélection de item[0] puisque c'est un tableau de item.  
+
+![img_1.png](resource/img_1.png)  
+Dans notre exemple et selon l'annexe fournit par MeteoConcept, une "weather" de valeur 3 signifie un temps nuageux.
+
+###Pour afficher la température du lieu visé par les coordonnées GPS
+
+Architecture : response>forecast>item[0]>tmin et response>forecast>item[0]>tmax  
+Sélection des températures minimales et maximales

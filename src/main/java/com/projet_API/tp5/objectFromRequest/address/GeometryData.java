@@ -1,4 +1,4 @@
-package com.projet_API.tp5.data.data.address;
+package com.projet_API.tp5.objectFromRequest.address;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,16 +6,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GeometryData {
 
-    public int[] getCoordinates() {
+    public double[] getCoordinates() {
         return coordinates;
     }
 
-    public void setCoordinates(int[] coordinates) {
+    public void setCoordinates(double[] coordinates) {
         this.coordinates = coordinates;
     }
 
     @JsonProperty
-    int[] coordinates;
+    double[] coordinates;
 
     public GeometryData() {}
 }

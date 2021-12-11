@@ -1,4 +1,4 @@
-package com.projet_API.tp5.data.data.address;
+package com.projet_API.tp5.objectFromRequest.address;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

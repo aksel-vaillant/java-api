@@ -1,10 +1,11 @@
-package com.projet_API.tp5.data.data.meteo;
+package com.projet_API.tp5.objectFromRequest.meteo;
 
 public class MeteoData {
 	
 	private int day;
 	private int tmin;
 	private int tmax;
+	private int weather;
 	private int probarain;
 	
 	public MeteoData() {
@@ -40,6 +41,12 @@ public class MeteoData {
 
 	public void setTmax(int tmax) {
 		this.tmax = tmax;
+	}
+
+	public int getWeather() {return weather;}
+
+	public void getWeather(int weather) {
+		this.weather = weather;
 	}
 	
 	

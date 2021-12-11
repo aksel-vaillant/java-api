@@ -1,4 +1,4 @@
-package com.projet_API.tp5.data.data.meteo;
+package com.projet_API.tp5.objectFromRequest.meteo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
